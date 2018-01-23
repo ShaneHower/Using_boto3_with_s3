@@ -49,6 +49,7 @@ def find_directory_of_desired_path(path):
         for j in new_dir:
             if (j not in files_in_bucket) and (j != '.DS_Store' and j != '.idea'):
                 # must compare the full path so path_to_load is the path to the file we want to upload
+                # this has to be moved above so its being compared to files in bucket properly
                 path_to_upload = '{0}/{1}'.format(i, j)
                 list_of_files_in_final_path.append(path_to_upload)
     return list_of_files_in_final_path
