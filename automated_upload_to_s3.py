@@ -62,7 +62,7 @@ while True:
     time.sleep(43200)
     new_length = find_len_of_desired_path(folders)
 
-    # have to refine these variables because the length changed and the new file
+    # have to redefine these variables because the length changed and the new file
     # needs to be included
     folders = get_folders_in_directory(files)
     desired_files = find_directory_of_desired_path(folders)
