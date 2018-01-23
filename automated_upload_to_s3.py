@@ -70,3 +70,4 @@ while True:
         for i in desired_files:
             s3_client.upload_file(i, 'my-first-backup-bucket0328', i)
             old_length = new_length
+    print('Files uploaded onto s3')
