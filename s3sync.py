@@ -1,4 +1,4 @@
-import os
+import os, time
 import boto3
 
 
@@ -33,12 +33,22 @@ class S3Sychronizer:
                 upload_files.append(i)
         return upload_files
 
-    def start_upload(self,upload_files):
+    def start_upload(self):
         s3_client = boto3.client('s3')
-        if len(upload_files) > 0:
-            for i in upload_files:
-                s3_client.upload_file(i, self.bucket, i)
-                print('File uploaded: {0}'.format(i))
-        else:
-            print('Not uploaded, no new files.')
+
+        while True:
+            print('sleeping')
+            time.sleep(self.sec)
+            s3 = S3Sychronizer(self.path, self.bucket, self.sec)
+            path = s3.get_local_files()
+            bucket = s3.get_remote_files()
+            files_to_upload = s3.files_not_s3(path, bucket)
+
+            if len(files_to_upload) > 0:
+                for i in files_to_upload:
+                    s3_client.upload_file(i, self.bucket, i)
+                    print('File uploaded: {0}'.format(i))
+            else:
+                print('Not uploaded, no new files.')
+
 
