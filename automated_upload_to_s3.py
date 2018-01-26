@@ -34,7 +34,7 @@ class GetPath:
                 folders_in_dir.append(path_to_watch_folders_in_pycharm)
         return folders_in_dir
 
-    def find_files_in_directory(self, folder):
+    def get_files_in_directory(self, folder):
         list_of_files = []
         bucket_files = GetBucketFiles(self.path,self.bucket).get_files()
         # compare the two lists, files_in_bucket and new_dir (which is created below).
@@ -71,7 +71,7 @@ class Run:
             # have to refine these variables because the length changed and the new file
             # needs to be included
             folders = get_path.get_folder_in_directory()
-            desired_files = get_path.find_files_in_directory(folders)
+            desired_files = get_path.get_files_in_directory(folders)
 
             if len(desired_files) > 0:
                 for i in desired_files:
