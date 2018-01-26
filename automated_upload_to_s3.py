@@ -27,16 +27,6 @@ def get_folders_in_directory(path):
             files_in_dir.append(path_to_watch_folders_in_pycharm)
     return files_in_dir
 
-def find_len_of_desired_path(path):
-    length = 0
-
-    for i in path:
-        # this is the last path to search. returns the list of files in each folder.
-        new_dir = os.listdir(i)
-        length = len(new_dir) + length
-    return length
-
-
 def find_directory_of_desired_path(path):
     list_of_files_in_final_path = []
     # compare the two lists, files_in_bucket and new_dir (which is created below).
@@ -47,28 +37,30 @@ def find_directory_of_desired_path(path):
         new_dir = os.listdir(i)
         # Finally compare each value in the list new_dir with files_in_bucket.
         for j in new_dir:
-            if (j not in files_in_bucket) and (j != '.DS_Store' and j != '.idea'):
-                # must compare the full path so path_to_load is the path to the file we want to upload
-                # this has to be moved above so its being compared to files in bucket properly
+            if j != '.DS_Store' and j != '.idea':
                 path_to_upload = '{0}/{1}'.format(i, j)
-                list_of_files_in_final_path.append(path_to_upload)
+                if path_to_upload not in files_in_bucket:
+                    # must compare the full path so path_to_load is the path to the file we want to upload
+                    list_of_files_in_final_path.append(path_to_upload)
+
     return list_of_files_in_final_path
 
 folders = get_folders_in_directory(files)
 desired_files = find_directory_of_desired_path(folders)
-old_length = find_len_of_desired_path(folders)
+
 
 while True:
     #run every 12 hours
+    print('sleeping')
     time.sleep(43200)
     new_length = find_len_of_desired_path(folders)
 
-    # have to redefine these variables because the length changed and the new file
+    # have to refine these variables because the length changed and the new file
     # needs to be included
     folders = get_folders_in_directory(files)
     desired_files = find_directory_of_desired_path(folders)
-    if new_length > old_length:
-        for i in desired_files:
-            s3_client.upload_file(i, 'my-first-backup-bucket0328', i)
-            old_length = new_length
+    
+    for i in desired_files:
+        s3_client.upload_file(i, 'my-first-backup-bucket0328', i)
+        
     print('Files uploaded onto s3')
