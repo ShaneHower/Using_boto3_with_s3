@@ -12,7 +12,6 @@ class GetBucketFiles:
         s3_resource = boto3.resource('s3')
         self.my_bucket = s3_resource.Bucket(self.bucket)
 
-
     def get_files(self):
         files_in_bucket = []
         for object in self.my_bucket.objects.filter(Prefix= self.path):
@@ -52,8 +51,6 @@ class GetPath:
                         # must compare the full path so path_to_load is the path to the file we want to upload
                         list_of_files.append(path_to_upload)
         return list_of_files
-
-
 
 class Run:
     def __init__(self, path, bucket, sec):
