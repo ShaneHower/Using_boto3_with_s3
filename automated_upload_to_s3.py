@@ -53,7 +53,7 @@ class GetPath:
                         list_of_files.append(path_to_upload)
         return list_of_files
 
-# boto3.client() used for uploading and downloading
+
 
 class Run:
     def __init__(self, path, bucket, sec):
@@ -62,6 +62,7 @@ class Run:
         self.sec = sec
 
     def start(self):
+        # boto3.client() used for uploading and downloading
         s3_client = boto3.client('s3')
         get_path = GetPath(self.path, self.bucket)
 
