@@ -54,7 +54,7 @@ class S3Synchronizer:
         print('sleeping')
         time.sleep(self.sec)
 
-        # have to refine these variables because the length changed and the new file
+        # have to redefine these variables because the length changed and the new file
         # needs to be included
         if len(files) > 0:
             for i in files:
