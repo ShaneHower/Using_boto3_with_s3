@@ -64,7 +64,7 @@ class Run:
         get_path = GetPath(self.path, self.bucket)
 
         while True:
-            #run every 12 hours
+            #run every x seconds
             print('sleeping')
             time.sleep(self.sec)
 
