@@ -1,4 +1,4 @@
-from automated_upload_to_s3.py import S3Synchronizer
+from s3sync.py import S3Synchronizer
 import time
 
 while True:
