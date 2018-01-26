@@ -1,12 +1,10 @@
 import os
 import boto3
 
-
 class S3Sychronizer:
-    def __init__(self, path, bucket, sec):
+    def __init__(self, path, bucket):
         self.path = path
         self.bucket = bucket
-        self.sec = sec
 
     def get_path(self):
         check_files = []
