@@ -50,7 +50,7 @@ class S3Synchronizer:
     def start_upload(self,files):
         s3_client = boto3.client('s3')
 
-        #run every 12 hours
+        #run every x seconds
         print('sleeping')
         time.sleep(self.sec)
 
