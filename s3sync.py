@@ -37,8 +37,6 @@ class S3Sychronizer:
         s3_client = boto3.client('s3')
 
         while True:
-            print('sleeping')
-            time.sleep(self.sec)
             s3 = S3Sychronizer(self.path, self.bucket, self.sec)
             path = s3.get_local_files()
             bucket = s3.get_remote_files()
@@ -50,5 +48,8 @@ class S3Sychronizer:
                     print('File uploaded: {0}'.format(i))
             else:
                 print('Not uploaded, no new files.')
+            
+            print('sleeping')
+            time.sleep(self.sec)
 
 
